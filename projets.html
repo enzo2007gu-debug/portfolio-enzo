@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projets — Enzo Guignon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F5F0E8;
+      --cream-dark: #EDE7D9;
+      --ink: #1a1a18;
+      --ink-light: #4a4a45;
+      --accent: #C4873A;
+      --white: #FEFCF7;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(245, 240, 232, 0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(196,135,58,0.15);
+    }
+    nav .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--ink);
+      text-decoration: none; letter-spacing: 0.02em;
+    }
+    nav ul { list-style: none; display: flex; gap: 2.5rem; }
+    nav ul li a {
+      text-decoration: none; color: var(--ink-light);
+      font-size: 0.85rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover, nav ul li a.active { color: var(--accent); }
+    .nav-tag {
+      font-size: 0.75rem; color: var(--accent);
+      border: 1px solid var(--accent); border-radius: 20px;
+      padding: 0.2rem 0.7rem; letter-spacing: 0.05em;
+    }
+
+    /* HERO */
+    .page-hero {
+      padding: 10rem 4rem 4rem;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(196,135,58,0.15);
+    }
+    .page-hero .section-label {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700; line-height: 1.05;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--accent); }
+    .page-hero p {
+      max-width: 500px; color: var(--ink-light);
+      font-size: 1rem; line-height: 1.75; margin-top: 1.2rem;
+    }
+
+    /* PROJETS GRID */
+    .projets-section {
+      padding: 5rem 4rem;
+    }
+    .projets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .projet-card {
+      background: var(--white);
+      border: 1px solid rgba(196,135,58,0.15);
+      border-radius: 2px;
+      padding: 2.5rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .projet-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--accent);
+      transition: height 0.3s;
+    }
+    .projet-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(196,135,58,0.12);
+      border-color: rgba(196,135,58,0.3);
+    }
+    .projet-card:hover::before { height: 100%; }
+
+    .projet-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 700;
+      color: rgba(196,135,58,0.15);
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .projet-icon {
+      font-size: 2rem; margin-bottom: 1rem;
+    }
+    .projet-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      margin-bottom: 0.8rem; line-height: 1.2;
+    }
+    .projet-title em { font-style: italic; color: var(--accent); }
+    .projet-desc {
+      color: var(--ink-light); font-size: 0.92rem;
+      line-height: 1.8; margin-bottom: 1.5rem;
+    }
+    .projet-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .projet-tag {
+      font-size: 0.72rem; padding: 0.3rem 0.7rem;
+      border-radius: 2px; border: 1px solid rgba(196,135,58,0.25);
+      color: var(--ink-light); background: var(--cream);
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 4rem;
+      background: var(--cream-dark);
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(196,135,58,0.15);
+      font-size: 0.78rem; color: var(--ink-light);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { display: none; }
+      .page-hero, .projets-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .projets-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">E.Guignon</a>
+    <ul>
+      <li><a href="index.html#profil">Profil</a></li>
+      <li><a href="projets.html" class="active">Projets</a></li>
+      <li><a href="index.html#experience">Expériences</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <span class="nav-tag">BUT GEII · Évry · 2025</span>
+  </nav>
+
+  <div class="page-hero">
+    <div class="section-label">Projets techniques</div>
+    <h1>Mes <em>réalisations.</em></h1>
+    <p>4 projets concrets réalisés au cours de ma formation — de l'électronique analogique à la robotique embarquée.</p>
+  </div>
+
+  <section class="projets-section">
+    <div class="projets-grid">
+
+      <!-- Projet 1 -->
+      <div class="projet-card">
+        <div class="projet-num">01</div>
+        <div class="projet-icon">🎵</div>
+        <div class="projet-title">Métronome <em>réglable</em></div>
+        <div class="projet-desc">
+          Conception d'un métronome électronique avec réglage de la fréquence et du volume sonore via deux potentiomètres. Le circuit génère un signal audio périodique dont les paramètres sont ajustables en temps réel, permettant un contrôle précis du tempo et de l'intensité sonore.
+        </div>
+        <div class="projet-tags">
+          <span class="projet-tag">Électronique analogique</span>
+          <span class="projet-tag">Potentiomètres</span>
+          <span class="projet-tag">Signal audio</span>
+          <span class="projet-tag">Circuit oscillateur</span>
+        </div>
+      </div>
+
+      <!-- Projet 2 -->
+      <div class="projet-card">
+        <div class="projet-num">02</div>
+        <div class="projet-icon">🤖</div>
+        <div class="projet-title">Robot <em>claquement de main</em></div>
+        <div class="projet-desc">
+          Réalisation d'un robot capable de détecter un claquement de main et de réagir en effectuant une rotation. Un microphone capte le son ambiant, un circuit de traitement analyse le signal et déclenche les moteurs du robot selon l'intensité détectée.
+        </div>
+        <div class="projet-tags">
+          <span class="projet-tag">Robotique</span>
+          <span class="projet-tag">Capteur sonore</span>
+          <span class="projet-tag">Traitement du signal</span>
+          <span class="projet-tag">Moteurs DC</span>
+        </div>
+      </div>
+
+      <!-- Projet 3 -->
+      <div class="projet-card">
+        <div class="projet-num">03</div>
+        <div class="projet-icon">➡️</div>
+        <div class="projet-title">Robot <em>suiveur de ligne</em></div>
+        <div class="projet-desc">
+          Développement d'un robot autonome capable de suivre une ligne au sol grâce à des capteurs infrarouges. Le système analyse en continu les données des capteurs et ajuste la trajectoire des roues pour maintenir le robot sur la ligne tracée.
+        </div>
+        <div class="projet-tags">
+          <span class="projet-tag">Capteurs IR</span>
+          <span class="projet-tag">Automatisme</span>
+          <span class="projet-tag">Arduino</span>
+          <span class="projet-tag">Asservissement</span>
+        </div>
+      </div>
+
+      <!-- Projet 4 -->
+      <div class="projet-card">
+        <div class="projet-num">04</div>
+        <div class="projet-icon">🔬</div>
+        <div class="projet-title">Testeur <em>NE555</em></div>
+        <div class="projet-desc">
+          Conception d'un testeur de circuit intégré NE555 réalisé par rétro-ingénierie. Analyse du fonctionnement interne du composant, puis conception d'un circuit de test permettant de vérifier le bon fonctionnement d'un NE555 en mode astable et monostable.
+        </div>
+        <div class="projet-tags">
+          <span class="projet-tag">Rétro-ingénierie</span>
+          <span class="projet-tag">NE555</span>
+          <span class="projet-tag">Électronique</span>
+          <span class="projet-tag">Circuit de test</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2025 — Enzo Guignon · Portfolio GEII</span>
+    <span>BUT GEII · Université d'Évry</span>
+  </footer>
+
+</body>
+</html>
